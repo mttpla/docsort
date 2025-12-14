@@ -128,6 +128,7 @@ If another instance is already running, the new one exits immediately and silent
 - Pandoc
 - macOS or Linux for development
 - Windows (or CI) for final validation
+- cargo-release (>= 0.25)
 
 Install Rust:
 ```bash
