@@ -58,26 +58,6 @@ File routed to destination
 
 ---
 
-## Dependencies
-
-### Pandoc (Required)
-
-DocSort relies on **Pandoc** for document conversion.
-
-Pandoc is used as an external executable and must be available on the system.
-
-#### What Pandoc Is Used For
-- DOCX → Markdown conversion
-- PDF → text/Markdown extraction (best effort)
-
-#### Install Pandoc
-
-- Download the latest binary from:
-  https://github.com/jgm/pandoc/releases
-- Add the Pandoc path the config
-  
----
-
 ## Installation (Windows)
 
 DocSort is a user-level background agent.
@@ -125,14 +105,10 @@ If another instance is already running, the new one exits immediately and silent
 ### Requirements
 
 - Rust (stable)
-- Pandoc
-- macOS or Linux for development
-- Windows (or CI) for final validation
-- cargo-release (>= 0.25)
+- run `cargo install cargo-release --version 0.25.15`
 
-Install Rust:
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo run
 ```
 
 ---
@@ -183,6 +159,19 @@ target/x86_64-pc-windows-msvc/release/docsort.exe
 
 ---
 
+
+## Dependencies
+
+### Pandoc (Required)
+
+DocSort relies on **Pandoc** for document conversion.
+
+Pandoc is used as an external executable and must be available on the system.
+
+#### What Pandoc Is Used For
+- DOCX → Markdown conversion
+- PDF → text/Markdown extraction (best effort)
+  
 
 ## Why DocSort Exists
 
