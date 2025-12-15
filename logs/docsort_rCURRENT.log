@@ -1,0 +1,4 @@
+[2025-12-15 22:31:11.928177 +01:00] INFO [docsort::logging] src/logging.rs:49: Logging initialized; writing to ./logs/docsort.log
+[2025-12-15 22:31:11.928952 +01:00] INFO [docsort] src/main.rs:58: DocSort v0.1.0 started with config: Config { watch_path: "./bucket", root_path: "./docs", log_file: "./logs/docsort.log" }
+[2025-12-15 22:31:11.928981 +01:00] ERROR [docsort] src/main.rs:61: Watch path "./bucket" does not exist; nothing will be processed
+[2025-12-15 22:31:11.928999 +01:00] INFO [docsort] src/main.rs:67: DocSort v0.1.0 shutting down.

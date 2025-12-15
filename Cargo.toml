@@ -7,3 +7,6 @@ edition = "2024"
 serde = { version = "1", features = ["derive"] }
 toml = "0.8"
 confy = "0.6"
+log = "0.4"
+flexi_logger = "0.31"
+thiserror = "1"

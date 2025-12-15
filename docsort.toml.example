@@ -1,0 +1,11 @@
+# Sample configuration for DocSort
+# Copy this file to `docsort.toml` and adjust values as needed.
+
+# Directory watched for incoming documents
+watch_path = "./bucket"
+
+# Destination root for sorted documents
+root_path = "./docs"
+
+# Full path (or relative path) to the log file used by DocSort
+log_file = "./logs/docsort.log"
