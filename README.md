@@ -58,70 +58,43 @@ File routed to destination
 
 ---
 
-## Installation (Windows)
-
-DocSort is a user-level background agent.
-
-### Install auto-start
-
-```bash
-docsort.exe install
-```
-
-This registers DocSort in:
-
-```
-HKCU\Software\Microsoft\Windows\CurrentVersion\Run
-```
-
-DocSort will start automatically after login.
-
-### Uninstall auto-start
-
-```bash
-docsort.exe uninstall
-```
-
----
-
-## Running Manually (for debugging)
-
-```bash
-docsort.exe run
-```
-
----
-
-## Single Instance Guarantee
-
-DocSort uses a **Windows named mutex** to ensure that only one instance runs per user session.
-
-If another instance is already running, the new one exits immediately and silently.
-
----
-
 ## Development
 
 ### Requirements
 
 - Rust (stable)
+  - install Rust using `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+- run `git config core.hooksPath scripts/git-hooks`
+- run `chmod +x scripts/git-hooks/*`
 - run `cargo install cargo-release --version 0.25.15`
+
+## Running Manually (for debugging)
 
 ```bash
 cargo run
 ```
 
----
-
 ## Running Tests
-
-Most tests are OS-agnostic and can be run on macOS.
 
 ```bash
 cargo test
 ```
 
----
+## Make a new release
+
+Use cargo-release:
+
+```bash
+cargo release patch
+cargo release minor
+cargo release major
+```
+
+This will:
+- Update the version in Cargo.toml
+- Create a release commit
+- Create a Git tag (e.g. v0.3.0)
+
 
 ## Building on macOS
 
@@ -140,11 +113,6 @@ target/release/docsort
 
 ### Cross-compile for Windows from macOS
 
-Install Windows target:
-```bash
-rustup target add x86_64-pc-windows-msvc
-```
-
 Build:
 ```bash
 cargo build --release --target x86_64-pc-windows-msvc
@@ -158,7 +126,6 @@ target/x86_64-pc-windows-msvc/release/docsort.exe
 > Note: Final validation and signing should be done on Windows or via CI.
 
 ---
-
 
 ## Dependencies
 
