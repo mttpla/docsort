@@ -1,0 +1,9 @@
+# Sample configuration for DocDrop
+# Copy this file to `docdrop.toml` and adjust values as needed.
+
+# Directory watched for incoming documents
+watch_path = "./bucket"
+
+# Destination root for sorted documents
+root_path = "./docs"
+
