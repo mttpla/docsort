@@ -1,10 +1,9 @@
 ---
 Title: Use Pandoc as external document conversion engine
-Status: accepted
-Superseded by:
+Status: superseded
+Superseded by: Use AI-based document conversion for PDF and DOCX to Markdown
 Date: 2025-12-12 23:32
 tags:
-  - adr
   - documents
   - pandoc
   - markdown
