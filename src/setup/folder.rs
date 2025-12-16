@@ -1,6 +1,6 @@
+use crate::setup::config::Config;
 use std::fs;
 use std::io;
-use crate::setup::config::Config;
 
 pub fn check_or_create_folders(cfg: &Config) -> io::Result<()> {
     for path in [&cfg.watch_path, &cfg.root_path] {
