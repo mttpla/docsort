@@ -1,5 +1,5 @@
 use flexi_logger::{
-    Cleanup, Criterion, Duplicate, FileSpec, FlexiLoggerError, Logger, LoggerHandle, Naming,
+    Age, Cleanup, Criterion, Duplicate, FileSpec, FlexiLoggerError, Logger, LoggerHandle, Naming,
     WriteMode,
 };
 use log::info;
@@ -8,6 +8,8 @@ use std::{
     path::{Path, PathBuf},
 };
 use thiserror::Error;
+
+const RETENTION_DAYS: usize = 365;
 
 /// Describes all recoverable errors that can happen while preparing the logger.
 #[derive(Debug, Error)]
@@ -40,9 +42,9 @@ pub fn init(log_file: &Path) -> Result<LoggerHandle, LoggingError> {
         .duplicate_to_stdout(Duplicate::Info)
         .format(flexi_logger::detailed_format)
         .rotate(
-            Criterion::Size(10 * 1024 * 1024),
-            Naming::Numbers,
-            Cleanup::KeepLogFiles(7),
+            Criterion::Age(Age::Day),
+            Naming::Timestamps,
+            Cleanup::KeepLogFiles(RETENTION_DAYS),
         )
         .start()?;
 
