@@ -2,7 +2,6 @@ use flexi_logger::{
     Age, Cleanup, Criterion, Duplicate, FileSpec, FlexiLoggerError, Logger, LoggerHandle, Naming,
     WriteMode,
 };
-use log::info;
 use std::{
     fs,
     path::{Path, PathBuf},
@@ -40,18 +39,13 @@ pub fn init(log_file: &Path) -> Result<LoggerHandle, LoggingError> {
         .log_to_file(file_spec)
         .write_mode(WriteMode::BufferAndFlush)
         .duplicate_to_stdout(Duplicate::Info)
-        .format(flexi_logger::detailed_format)
+        .format_for_stdout(flexi_logger::default_format)
+        .format_for_files(flexi_logger::detailed_format)
         .rotate(
             Criterion::Age(Age::Day),
             Naming::Timestamps,
             Cleanup::KeepLogFiles(RETENTION_DAYS),
         )
         .start()?;
-
-    info!(
-        "Logging initialized; writing to {}",
-        log_file.to_string_lossy()
-    );
-
     Ok(handle)
 }
