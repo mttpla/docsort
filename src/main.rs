@@ -2,6 +2,10 @@ use docsort::setup;
 use log::{error, info};
 
 fn main() {
+    let _instance = setup::single_instance::check_single_instance().unwrap_or_else(|| {
+        eprintln!("DocSort is already running!");
+        std::process::exit(1);
+    });
     let cfg = setup::config::Config::load();
     let _logger_handle = setup::logging::init(&cfg.log_file).unwrap_or_else(|err| {
         panic!(
