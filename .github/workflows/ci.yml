@@ -40,7 +40,6 @@ jobs:
     name: Build Windows release artifact
     needs: quality
     runs-on: windows-latest
-    if: startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
@@ -56,6 +55,13 @@ jobs:
         with:
           cache-on-failure: true
 
+      - name: Determine version label
+        id: describe
+        shell: pwsh
+        run: |
+          $Describe = (git describe --always --dirty).Trim()
+          "version=$Describe" | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append
+
       - name: Build release binary
         run: cargo build --release --target x86_64-pc-windows-msvc
 
@@ -66,12 +72,14 @@ jobs:
           $OutDir = "dist"
           New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
           Copy-Item $Binary -Destination "$OutDir/docsort.exe"
-          $Archive = "$OutDir/docsort-${{ github.ref_name }}-windows-x86_64.zip"
+          $Version = "${{ steps.describe.outputs.version }}"
+          $ArchiveName = "docsort-$Version-windows-x86_64.zip"
+          $Archive = "$OutDir/$ArchiveName"
           Compress-Archive -Path "$OutDir/docsort.exe" -DestinationPath $Archive -Force
 
       - name: Publish release asset
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/docsort-${{ github.ref_name }}-windows-x86_64.zip
+          files: dist/docsort-${{ steps.describe.outputs.version }}-windows-x86_64.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
