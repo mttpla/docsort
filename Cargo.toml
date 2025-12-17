@@ -2,6 +2,10 @@
 name = "docsort"
 version = "0.1.0"
 edition = "2024"
+description = "DocSort automatically classifies documents after user login."
+license = "MIT"
+repository = "https://github.com/mttpla/docsort"
+homepage = "https://github.com/mttpla/docsort"
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
