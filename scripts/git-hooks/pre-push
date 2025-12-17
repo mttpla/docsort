@@ -5,3 +5,5 @@ echo "Running clippy..."
 cargo clippy -- -D warnings
 echo "Running tests..."
 ~/.cargo/bin/cargo test
+echo "Cross-compiling for Windows..."
+~/.cargo/bin/cargo check --target x86_64-pc-windows-msvc
