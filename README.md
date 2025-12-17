@@ -111,22 +111,6 @@ target/release/docsort
 
 ---
 
-### Cross-compile for Windows from macOS
-
-Build:
-```bash
-cargo build --release --target x86_64-pc-windows-msvc
-```
-
-Result:
-```
-target/x86_64-pc-windows-msvc/release/docsort.exe
-```
-
-> Note: Final validation and signing should be done on Windows or via CI.
-
----
-
 ## Dependencies
 
 ### Pandoc (Required)

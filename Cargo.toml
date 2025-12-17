@@ -12,3 +12,6 @@ flexi_logger = "0.31"
 thiserror = "1"
 single-instance = "0.3"
 clap = { version = "4.5", features = ["derive"] }
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.52"

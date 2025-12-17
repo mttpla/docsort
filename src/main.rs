@@ -1,4 +1,5 @@
 use docsort::cli::{AutostartAction, Cli, Command};
+use docsort::platform;
 use docsort::setup;
 use log::{error, info};
 
@@ -28,12 +29,20 @@ fn main() {
             info!("starting...");
         }
         Command::Autostart { action } => match action {
-            AutostartAction::Enable => {
-                info!("Command autostart enabled");
-            }
-            AutostartAction::Disable => {
-                info!("Command autostart disabled");
-            }
+            AutostartAction::Enable => match platform::autostart::enable() {
+                Ok(()) => info!("Autostart enabled for the current user"),
+                Err(err) => {
+                    error!("Failed to enable autostart: {err}");
+                    std::process::exit(1);
+                }
+            },
+            AutostartAction::Disable => match platform::autostart::disable() {
+                Ok(()) => info!("Autostart disabled for the current user"),
+                Err(err) => {
+                    error!("Failed to disable autostart: {err}");
+                    std::process::exit(1);
+                }
+            },
         },
     }
     info!("shutting down.");
