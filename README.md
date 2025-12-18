@@ -90,7 +90,7 @@ cargo release minor
 cargo release major
 ```
 
-By default the command runs in dry-run mode; add --execute to perform the release.
+By default the command runs in dry-run mode; add --execute --no-publish to perform the release.
 
 This will:
 - Update the version in Cargo.toml
