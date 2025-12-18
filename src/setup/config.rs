@@ -26,7 +26,7 @@ impl Config {
         let config_path = exe_dir.join("docsort.toml");
 
         confy::load_path(&config_path).unwrap_or_else(|err| {
-            eprintln!(
+            log::info!(
                 "Cannot read {:?} ({err}), using built-in defaults",
                 config_path
             );
