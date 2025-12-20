@@ -1,14 +1,8 @@
 use crate::setup::config::Config;
-use notify::{
-    Event, EventKind,
-    event::{MetadataKind, ModifyKind},
-};
+use notify::{Event, EventKind};
 
-pub(crate) fn filter_supported_modify_metadata_extended_file_event(
-    cfg: &Config,
-    event: Event,
-) -> Option<Event> {
-    let EventKind::Modify(ModifyKind::Metadata(MetadataKind::Extended)) = event.kind else {
+pub fn filter_supported_modify_file_event(cfg: &Config, event: Event) -> Option<Event> {
+    let EventKind::Modify(_) = event.kind else {
         return None;
     };
 
