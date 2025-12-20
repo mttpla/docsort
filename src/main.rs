@@ -1,3 +1,5 @@
+#![cfg_attr(windows, windows_subsystem = "windows")]
+
 use docsort::cli::{AutostartAction, Cli, Command};
 use docsort::platform;
 use docsort::setup;
@@ -26,6 +28,13 @@ fn main() {
             setup::folder::check_or_create_folders(&cfg).unwrap_or_else(|err| {
                 error!("Failed to create folders: {err}");
             });
+
+            // Start the long-running app loop (folder watcher + processing pipeline).
+            // This blocks until the process is terminated (logout/shutdown/kill).
+            if let Err(err) = docsort::app::run(&cfg) {
+                error!("app terminated with error: {err:#}");
+                std::process::exit(1);
+            }
         }
 
         Command::Autostart { action } => match action {

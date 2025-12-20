@@ -7,6 +7,7 @@ pub struct Config {
     pub watch_path: PathBuf,
     pub root_path: PathBuf,
     pub log_file: PathBuf,
+    pub allowed_file_extensions: Vec<String>,
 }
 
 impl Default for Config {
@@ -15,6 +16,12 @@ impl Default for Config {
             watch_path: PathBuf::from("./bucket"),
             root_path: PathBuf::from("./docs"),
             log_file: PathBuf::from("./logs/docsort.log"),
+            allowed_file_extensions: vec![
+                "pdf".to_string(),
+                "docx".to_string(),
+                "xls".to_string(),
+                "xlsx".to_string(),
+            ],
         }
     }
 }
