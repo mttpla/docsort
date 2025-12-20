@@ -35,17 +35,29 @@ pub fn init(log_file: &Path) -> Result<LoggerHandle, LoggingError> {
     }
 
     let file_spec = FileSpec::try_from(log_file)?;
-    let handle = Logger::try_with_env_or_str("info")?
+
+    #[cfg(windows)]
+    let duplicate = Duplicate::None;
+    #[cfg(not(windows))]
+    let duplicate = Duplicate::Info;
+
+    let mut logger = Logger::try_with_env_or_str("info")?
         .log_to_file(file_spec)
         .write_mode(WriteMode::BufferAndFlush)
-        .duplicate_to_stdout(Duplicate::Info)
-        .format_for_stdout(flexi_logger::default_format)
+        .duplicate_to_stdout(duplicate)
         .format_for_files(flexi_logger::detailed_format)
         .rotate(
             Criterion::Age(Age::Day),
             Naming::Timestamps,
             Cleanup::KeepLogFiles(RETENTION_DAYS),
-        )
-        .start()?;
+        );
+
+    // Only format stdout when we actually duplicate there (non-Windows).
+    #[cfg(not(windows))]
+    {
+        logger = logger.format_for_stdout(flexi_logger::default_format);
+    }
+
+    let handle = logger.start()?;
     Ok(handle)
 }
