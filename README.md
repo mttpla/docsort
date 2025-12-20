@@ -12,6 +12,20 @@ DocSort is designed to be:
 - safe (runs with user permissions only)
 
 ---
+## Run DocSort at Startup (Windows)
+
+DocSort is designed to run automatically **after user login**, with **standard user permissions**.
+
+It does **not** run as a Windows Service and does **not** require administrator rights.
+
+### Manual setup (recommended)
+
+To enable automatic startup, create a shortcut (`.lnk`) in the user Startup folder.
+
+1. Locate the Startup folder: `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`
+2. Create a shortcut to the DocSort executable (`docsort.exe`) in this folder.
+
+---
 
 ## What DocSort Does
 
