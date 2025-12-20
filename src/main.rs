@@ -17,7 +17,7 @@ fn main() {
     let cli = Cli::parse_args();
 
     match cli.command() {
-        Command::Run => {
+        Command::Start => {
             info!("starting...");
             let _instance = setup::single_instance::check_single_instance().unwrap_or_else(|| {
                 eprintln!("DocSort is already running!");
@@ -27,6 +27,7 @@ fn main() {
                 error!("Failed to create folders: {err}");
             });
         }
+
         Command::Autostart { action } => match action {
             AutostartAction::Enable => match platform::autostart::enable() {
                 Ok(()) => info!("Autostart enabled for the current user"),

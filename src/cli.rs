@@ -9,8 +9,7 @@ pub struct Cli {
 
 #[derive(Subcommand, Clone)]
 pub enum Command {
-    #[command(about = "Sort and organize (default)")]
-    Run,
+    Start,
     #[command(about = "Manage the autostart behavior")]
     Autostart {
         #[arg(value_enum)]
@@ -30,6 +29,6 @@ impl Cli {
     }
 
     pub fn command(&self) -> Command {
-        self.command.clone().unwrap_or(Command::Run)
+        self.command.clone().unwrap_or(Command::Start)
     }
 }
