@@ -31,7 +31,7 @@ fn main() {
 
             // Start the long-running app loop (folder watcher + processing pipeline).
             // This blocks until the process is terminated (logout/shutdown/kill).
-            if let Err(err) = docsort::app::run(&cfg) {
+            if let Err(err) = docsort::app::runner::run(&cfg) {
                 error!("app terminated with error: {err:#}");
                 std::process::exit(1);
             }

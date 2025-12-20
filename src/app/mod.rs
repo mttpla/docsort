@@ -1,3 +1,1 @@
-mod runner;
-
-pub use runner::run;
+pub mod runner;
