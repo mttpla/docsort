@@ -4,16 +4,38 @@ use notify::{
     event::{MetadataKind, ModifyKind},
 };
 
+enum AppMsg {
+    Notify(notify::Result<Event>),
+    Shutdown,
+}
+
 pub fn run(cfg: &Config) -> notify::Result<()> {
     log::info!("app::run() watching {:?}", cfg.watch_path);
 
-    let (event_tx, event_rx) = std::sync::mpsc::channel();
-    let mut watcher = RecommendedWatcher::new(event_tx, notify::Config::default())?;
+    let (event_tx, event_rx) = std::sync::mpsc::channel::<AppMsg>();
+
+    let shutdown_tx = event_tx.clone();
+    ctrlc::set_handler(move || {
+        let _ = shutdown_tx.send(AppMsg::Shutdown);
+    })
+    .expect("failed to set Ctrl-C handler");
+
+    let notify_tx = event_tx.clone();
+    let mut watcher = RecommendedWatcher::new(
+        move |res| {
+            let _ = notify_tx.send(AppMsg::Notify(res));
+        },
+        notify::Config::default(),
+    )?;
     watcher.watch(&cfg.watch_path, RecursiveMode::Recursive)?;
 
     for res in event_rx {
         match res {
-            Ok(event) => {
+            AppMsg::Shutdown => {
+                log::info!("Shutdown requested (Ctrl-C).");
+                break;
+            }
+            AppMsg::Notify(Ok(event)) => {
                 log::info!("Change: {event:?}");
                 if let Some(event) =
                     filter_supported_modify_metadata_extended_file_event(cfg, event)
@@ -21,7 +43,7 @@ pub fn run(cfg: &Config) -> notify::Result<()> {
                     log::info!("Relevant change: {event:?}");
                 }
             }
-            Err(error) => log::error!("Error: {error:?}"),
+            AppMsg::Notify(Err(error)) => log::error!("Error: {error:?}"),
         }
     }
     Ok(())
