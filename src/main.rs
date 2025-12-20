@@ -6,7 +6,6 @@ use docsort::setup;
 use log::{error, info};
 
 fn main() {
-
     let cli = Cli::parse_args();
 
     match cli.command() {
@@ -43,7 +42,7 @@ fn main() {
             AutostartAction::Enable => match platform::autostart::enable() {
                 Ok(()) => println!("Autostart enabled for the current user"),
                 Err(err) => {
-                    eprintln!!("Failed to enable autostart: {err}");
+                    eprintln!("Failed to enable autostart: {err}");
                     std::process::exit(1);
                 }
             },
@@ -56,5 +55,4 @@ fn main() {
             },
         },
     }
-
 }
