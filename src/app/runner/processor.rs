@@ -16,9 +16,7 @@ pub fn process_messages(cfg: &Config, rx: std::sync::mpsc::Receiver<RunnerMsg>) 
             }
             RunnerMsg::Notify(Ok(event)) => {
                 log::info!("Change: {event:?}");
-                if let Some(event) =
-                    super::filter::filter_supported_modify_file_event(cfg, event)
-                {
+                if let Some(event) = super::filter::filter_supported_modify_file_event(cfg, event) {
                     log::info!("Relevant change: {event:?}");
                 }
             }
