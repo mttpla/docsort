@@ -123,17 +123,18 @@ fn supervisor_main(cfg: Config, sup_rx: Receiver<SupervisorCmd>) {
         }
 
         // 4) Dispatch next task if possible.
-        if st.shutdown_deadline.is_none() && st.in_flight.is_none() {
-            if let Some(next) = st.queue.pop_front() {
-                if let Err(err) = st.worker_tx.send(WorkerCmd::Run(next.clone())) {
-                    log::error!("Failed to send task to worker ({err:?}); replacing worker.");
-                    // Put it back and replace worker.
-                    st.queue.push_front(next);
-                    replace_worker(&mut st, cfg.clone());
-                } else {
-                    st.last_heartbeat = Instant::now();
-                    st.in_flight = Some(next);
-                }
+        if st.shutdown_deadline.is_none()
+            && st.in_flight.is_none()
+            && let Some(next) = st.queue.pop_front()
+        {
+            if let Err(err) = st.worker_tx.send(WorkerCmd::Run(next.clone())) {
+                log::error!("Failed to send task to worker ({err:?}); replacing worker.");
+                // Put it back and replace worker.
+                st.queue.push_front(next);
+                replace_worker(&mut st, cfg.clone());
+            } else {
+                st.last_heartbeat = Instant::now();
+                st.in_flight = Some(next);
             }
         }
 
@@ -146,16 +147,16 @@ fn supervisor_main(cfg: Config, sup_rx: Receiver<SupervisorCmd>) {
 
         // 6) Forced shutdown: once shutdown is requested, wait up to 2 seconds for in-flight work
         // to finish, then exit anyway. (deadline is set at the moment shutdown is requested)
-        if let Some(deadline) = st.shutdown_deadline {
-            if Instant::now() >= deadline {
-                let _ = st.worker_tx.send(WorkerCmd::Stop);
-                log::info!(
-                    "Supervisor forced exit after shutdown deadline (queue_len={}, in_flight={}).",
-                    st.queue.len(),
-                    st.in_flight.as_ref().map(|t| t.id).unwrap_or(0)
-                );
-                break;
-            }
+        if let Some(deadline) = st.shutdown_deadline
+            && Instant::now() >= deadline
+        {
+            let _ = st.worker_tx.send(WorkerCmd::Stop);
+            log::info!(
+                "Supervisor forced exit after shutdown deadline (queue_len={}, in_flight={}).",
+                st.queue.len(),
+                st.in_flight.as_ref().map(|t| t.id).unwrap_or(0)
+            );
+            break;
         }
     }
 }
