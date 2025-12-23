@@ -1,0 +1,191 @@
+{
+  "main": {
+    "id": "aa97513d66bf0acd",
+    "type": "split",
+    "children": [
+      {
+        "id": "7effc5e9a2a544b8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5f93f90ad911f359",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/workflow.v.0.1.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "workflow.v.0.1.excalidraw"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cf06d91f1db5f82d",
+    "type": "split",
+    "children": [
+      {
+        "id": "5d7aba5df8e39a9a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aca3b99a23e081db",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "16dd5f3760a545dd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "95c2aa6f156ca609",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "27f1f26bd9af64fd",
+    "type": "split",
+    "children": [
+      {
+        "id": "ba5aa58f7e6b0def",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "52e4fb431ac6b6d1",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Excalidraw/workflow.v.0.1.excalidraw.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for workflow.v.0.1.excalidraw"
+            }
+          },
+          {
+            "id": "96d2fa0dbf3e5048",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Excalidraw/workflow.v.0.1.excalidraw.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from workflow.v.0.1.excalidraw"
+            }
+          },
+          {
+            "id": "9e24a19e357624ea",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "867eca69cbdfa9fe",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "da80a353c162de6e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Excalidraw/workflow.v.0.1.excalidraw.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of workflow.v.0.1.excalidraw"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false
+    }
+  },
+  "active": "5f93f90ad911f359",
+  "lastOpenFiles": [
+    "Excalidraw/Drawing 2025-12-23 08.09.34.excalidraw.md",
+    "Excalidraw/workflow.v.0.1.excalidraw.md",
+    "Excalidraw"
+  ]
+}
